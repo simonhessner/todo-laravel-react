@@ -31,7 +31,7 @@ Besides that I really like Laravel and find it easy to use. Especially the artis
 
 - If the tool is slow (adding, updating, deleting takes too long), I would first inspect the network requests to see what takes how long. I would also check if there are redundant queries (see improvements above) and eliminate these.
 - If the remaining queries are still too slow, I would use a profiler in order to see which part of the route controller takes how long. A likely candidate is the database, so it would probably be a good idea to use MySQL or PostgresSQL istead of SQLite. (see improvements above)
-- If find operations take too long, setting indices would help
+- If find operations take too long, setting indices in the database scheme would help
 - For larger scale projects a redundant database setup could be used. Alternatively, independent tables could be hosted on different database servers to distribute the load.
 
 I had to use a profiler for a ML project where training a model was very slow. The training procedure was not a standard method because it involved a separate optimizer and learning rate scheduler for each sample rather than a shared one for the whole batch. By rearranging some of the operations I was able to speed up the training by 10-20% (if I remember correctly)
