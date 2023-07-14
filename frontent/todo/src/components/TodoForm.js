@@ -27,13 +27,16 @@ export const TodoForm = ({ id }) => {
   return (
     <Form onSubmit={handler}>
       <h3>Create todo in selected list</h3>
-      <Form.Group className="mb-3" controlId="description">
-        <Form.Label>Task description</Form.Label>
-        <Form.Control type="text" placeholder="Enter name" />
+      <Form.Group
+        className="mb-3"
+        controlId="description"
+        style={{ display: "flex" }}
+      >
+        <Form.Control type="text" placeholder="Enter description" />
+        <Button variant="primary" type="submit">
+          add
+        </Button>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        add
-      </Button>
     </Form>
   );
 };

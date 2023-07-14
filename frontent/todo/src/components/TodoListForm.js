@@ -24,13 +24,16 @@ export const TodoListForm = ({ onCreate }) => {
   return (
     <Form onSubmit={handler}>
       <h3>Create list</h3>
-      <Form.Group className="mb-3" controlId="listName">
-        <Form.Label>List name</Form.Label>
+      <Form.Group
+        className="mb-3"
+        controlId="listName"
+        style={{ display: "flex" }}
+      >
         <Form.Control type="text" placeholder="Enter name" />
+        <Button variant="primary" type="submit">
+          add
+        </Button>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        add
-      </Button>
     </Form>
   );
 };

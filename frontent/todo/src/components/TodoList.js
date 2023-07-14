@@ -7,7 +7,37 @@ import { AiFillCheckCircle, AiFillCloseSquare } from "react-icons/ai";
 import { updateTodo, updateList } from "../services/api";
 import { RenameForm } from "./RenameForm";
 
+const Filter = ({ filter, setFilter }) => {
+  return (
+    <div>
+      show
+      <Button
+        variant="link"
+        disabled={filter === "all"}
+        onClick={() => setFilter("all")}
+      >
+        all
+      </Button>
+      <Button
+        variant="link"
+        disabled={filter === "completed"}
+        onClick={() => setFilter("completed")}
+      >
+        completed
+      </Button>
+      <Button
+        variant="link"
+        disabled={filter === "uncompleted"}
+        onClick={() => setFilter("uncompleted")}
+      >
+        uncompleted
+      </Button>
+    </div>
+  );
+};
+
 export const TodoList = ({ id }) => {
+  const [filter, setFilter] = useState("all");
   const [hovered, setHovered] = useState(null);
   const isHovered = (id) => hovered === id;
 
@@ -38,16 +68,30 @@ export const TodoList = ({ id }) => {
     return "Loading...";
   }
 
-  const todos = result.data.todos;
   const name = result.data.name;
+  let filterFn = {
+    completed: (todo) => todo.completed,
+    uncompleted: (todo) => !todo.completed,
+    all: () => true,
+  }[filter];
+  let todos = result.data.todos.filter(filterFn);
+
+  const header = (
+    <>
+      <RenameForm onUpdate={changeName} />
+      <Filter {...{ filter, setFilter }} />
+    </>
+  );
 
   if (todos.length === 0) {
     return (
-      <>
-        <RenameForm onUpdate={changeName} />
+      <div>
         <h2>{name}</h2>
+        {header}
         Empty list. Use the form below to add tasks
-      </>
+        <br />
+        <br />
+      </div>
     );
   }
 
@@ -75,8 +119,8 @@ export const TodoList = ({ id }) => {
 
   return (
     <div>
-      <RenameForm onUpdate={changeName} />
       <h2>{name}</h2>
+      {header}
       <ul>
         {todos.map((todo) => (
           <li
