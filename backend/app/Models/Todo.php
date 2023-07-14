@@ -12,7 +12,8 @@ class Todo extends Model
 
     protected $fillable = [
         'description',
-        'todo_list_id'
+        'todo_list_id',
+        'completed'
     ];
 
     public function list(): BelongsTo

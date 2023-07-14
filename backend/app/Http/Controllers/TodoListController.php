@@ -56,8 +56,16 @@ class TodoListController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TodoList $TodoList)
+    public function destroy(string $id)
     {
-        //
+        $list = TodoList::find($id);
+        if (!$list->exists()) {
+            return response()->json([
+                'error' => 'List not found'
+            ], 404);
+        }
+
+        $list->delete();
+        return response()->json([], 204);
     }
 }

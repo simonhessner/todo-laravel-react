@@ -12,6 +12,7 @@ class TodoController extends Controller
      */
     public function index()
     {
+        // TODO
         $todos = Todo::all();
         return response()->json([
             'todos' => $todos,
@@ -22,11 +23,11 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(string $todo_list_id, Request $request)
     {
         $todo = Todo::create([
             'description' => $request->description,
-            'todo_list_id' => $request->todo_list_id  // make sure this exists
+            'todo_list_id' => $todo_list_id
         ]);
         return response()->json($todo, 201);
     }
@@ -49,9 +50,19 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request, string $list_id, string $todo_id)
     {
-        //
+        // TODO check if list matches
+        $todo = Todo::find($todo_id);
+        if ($todo) {
+            $todo->completed = $request->completed;
+            $todo->save();
+            return response()->json($todo, 200);
+        } else {
+            return response()->json([
+                "error" => "Todo item not found"
+            ], 404);
+        }
     }
 
     /**
