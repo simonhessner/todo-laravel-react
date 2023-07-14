@@ -18,6 +18,7 @@ Besides that I really like Laravel and find it easy to use. Especially the artis
 - Nicer error messages instead of using alert
 - Ability to search for todos
 - Function to move todos between lists
+- Use a router library to have a bookmarkable URL for each list (and support browser navigation)
 - Live updates either using websockets or polling so that the app automatically syncs between different devices
 - Maybe use React Native to also have a mobile app
 

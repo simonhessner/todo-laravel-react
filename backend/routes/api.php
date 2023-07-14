@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('list', TodoListController::class);
-Route::apiResource('list.todo', TodoController::class);
+Route::apiResource('list.todo', TodoController::class)->shallow()->except(['index']);

@@ -127,7 +127,7 @@ export const TodoList = ({ id }) => {
 
   const remove = (todo) => {
     if (window.confirm(`Do you really want do delete '${todo.description}'?`)) {
-      deleteTodoMutation.mutate({ listId: id, todoId: todo.id });
+      deleteTodoMutation.mutate(todo.id);
     }
   };
 

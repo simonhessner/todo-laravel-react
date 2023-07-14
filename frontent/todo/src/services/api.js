@@ -35,20 +35,15 @@ export const addTodo = ({ id, description }) => {
 };
 
 export const updateTodo = (todo) => {
-  const listId = todo.todo_list_id;
   const todoId = todo.id;
 
-  return axios
-    .put(`${baseUrl}/list/${listId}/todo/${todoId}`, todo)
-    .then((res) => {
-      return res.data;
-    });
+  return axios.put(`${baseUrl}/todo/${todoId}`, todo).then((res) => {
+    return res.data;
+  });
 };
 
-export const deleteTodo = ({ listId, todoId }) => {
-  return axios
-    .delete(`${baseUrl}/list/${listId}/todo/${todoId}`)
-    .then((res) => {
-      return res.data;
-    });
+export const deleteTodo = (todoId) => {
+  return axios.delete(`${baseUrl}/todo/${todoId}`).then((res) => {
+    return res.data;
+  });
 };

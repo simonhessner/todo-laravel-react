@@ -7,15 +7,8 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    public function index()
-    {
-        // TODO
-        $todos = Todo::all();
-        return response()->json([
-            'todos' => $todos,
-            'name' => 'todo'
-        ], 200);
-    }
+    // This controller has no index function because it would be
+    // redundant with TodoListController::show
 
     public function store(string $todo_list_id, Request $request)
     {
@@ -38,9 +31,8 @@ class TodoController extends Controller
         }
     }
 
-    public function update(Request $request, string $list_id, string $todo_id)
+    public function update(Request $request, string $todo_id)
     {
-        // TODO check if list matches
         $todo = Todo::find($todo_id);
         if ($todo) {
             $todo->completed = $request->completed;
@@ -53,9 +45,8 @@ class TodoController extends Controller
         }
     }
 
-    public function destroy(string $list_id, string $todo_id)
+    public function destroy(string $todo_id)
     {
-        // TODO check if list matches
         $todo = Todo::find($todo_id);
         if ($todo) {
             $todo->delete();
