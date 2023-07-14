@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         // TODO
@@ -20,9 +17,6 @@ class TodoController extends Controller
         ], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(string $todo_list_id, Request $request)
     {
         $todo = Todo::create([
@@ -32,9 +26,6 @@ class TodoController extends Controller
         return response()->json($todo, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $todo = Todo::find($id);
@@ -47,9 +38,6 @@ class TodoController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $list_id, string $todo_id)
     {
         // TODO check if list matches
@@ -65,9 +53,6 @@ class TodoController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $list_id, string $todo_id)
     {
         // TODO check if list matches

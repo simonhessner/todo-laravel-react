@@ -7,18 +7,12 @@ use Illuminate\Http\Request;
 
 class TodoListController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $lists = TodoList::all();
         return response()->json($lists, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $lists = TodoList::create([
@@ -27,9 +21,6 @@ class TodoListController extends Controller
         return response()->json($lists, 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $list = TodoList::find($id);
@@ -45,9 +36,6 @@ class TodoListController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $list = TodoList::find($id);
@@ -62,9 +50,6 @@ class TodoListController extends Controller
         return response()->json($list);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $list = TodoList::find($id);
