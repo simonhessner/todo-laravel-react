@@ -64,6 +64,9 @@ export const TodoList = ({ id }) => {
       queryClient.invalidateQueries(["list", id]);
       queryClient.invalidateQueries(["lists"]);
     },
+    onError: (result) => {
+      alert(result.response.data.message);
+    },
   });
 
   const deleteTodoMutation = useMutation(deleteTodo, {
