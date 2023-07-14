@@ -23,38 +23,38 @@ class TodoController extends Controller
     {
         $todo = Todo::find($id);
         if ($todo) {
-            return response()->json($todo, 200);
-        } else {
             return response()->json([
                 "error" => "Todo item not found"
             ], 404);
         }
+
+        return response()->json($todo, 200);
     }
 
     public function update(Request $request, string $todo_id)
     {
         $todo = Todo::find($todo_id);
-        if ($todo) {
-            $todo->completed = $request->completed;
-            $todo->save();
-            return response()->json($todo, 200);
-        } else {
+        if (!$todo) {
             return response()->json([
                 "error" => "Todo item not found"
             ], 404);
         }
+
+        $todo->completed = $request->completed;
+        $todo->save();
+        return response()->json($todo, 200);
     }
 
     public function destroy(string $todo_id)
     {
         $todo = Todo::find($todo_id);
-        if ($todo) {
-            $todo->delete();
-            return response()->json([], 204);
-        } else {
+        if (!$todo) {
             return response()->json([
                 "error" => "Todo item not found"
             ], 404);
         }
+
+        $todo->delete();
+        return response()->json([], 204);
     }
 }
