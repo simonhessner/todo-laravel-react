@@ -48,9 +48,18 @@ class TodoListController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TodoList $TodoList)
+    public function update(Request $request, string $id)
     {
-        //
+        $list = TodoList::find($id);
+        if (!$list->exists()) {
+            return response()->json([
+                'error' => 'List not found'
+            ], 404);
+        }
+
+        $list->name = $request->name;
+        $list->save();
+        return response()->json($list);
     }
 
     /**

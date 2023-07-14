@@ -46,3 +46,9 @@ export const updateTodo = (todo) => {
       return res.data;
     });
 };
+
+export const updateList = ({ list, id }) => {
+  return axios.put(`${baseUrl}/list/${id}`, list).then((res) => {
+    return res.data;
+  });
+};

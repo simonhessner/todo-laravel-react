@@ -4,7 +4,8 @@ import { getList } from "../services/api";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import { AiFillCheckCircle, AiFillCloseSquare } from "react-icons/ai";
-import { updateTodo } from "../services/api";
+import { updateTodo, updateList } from "../services/api";
+import { RenameForm } from "./RenameForm";
 
 export const TodoList = ({ id }) => {
   const [hovered, setHovered] = useState(null);
@@ -16,6 +17,13 @@ export const TodoList = ({ id }) => {
   const updateTodoMutation = useMutation(updateTodo, {
     onSuccess: () => {
       queryClient.invalidateQueries(["list", id]);
+    },
+  });
+
+  const updateListMutation = useMutation(updateList, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["list", id]);
+      queryClient.invalidateQueries(["lists"]);
     },
   });
 
@@ -57,8 +65,16 @@ export const TodoList = ({ id }) => {
     updateTodoMutation.mutate(newTodo);
   };
 
+  const changeName = (newName) => {
+    const newList = {
+      name: newName,
+    };
+    updateListMutation.mutate({ list: newList, id });
+  };
+
   return (
     <div>
+      <RenameForm onUpdate={changeName} />
       <h2>{name}</h2>
       <ul>
         {todos.map((todo) => (
@@ -74,10 +90,7 @@ export const TodoList = ({ id }) => {
                   variant={todo.completed ? "secondary" : "success"}
                   size="sm"
                   style={{ padding: "1px", marginLeft: "5px" }}
-                  onClick={() => {
-                    console.log(todo.id);
-                    toggleStatus(todo);
-                  }}
+                  onClick={() => toggleStatus(todo)}
                 >
                   {todo.completed ? (
                     <AiFillCloseSquare />
