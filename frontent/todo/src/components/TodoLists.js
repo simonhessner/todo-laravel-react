@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
 import { useQuery } from "react-query";
-import { getLists, removeList } from "../services/api";
 import Button from "react-bootstrap/Button";
+import { getLists, removeList } from "../services/api";
 
 export const TodoLists = ({ selected, setSelected }) => {
   const [hovered, setHovered] = useState(null);
@@ -46,6 +46,7 @@ export const TodoLists = ({ selected, setSelected }) => {
 
     if (isHovered(id)) {
       style.textDecoration = "underline";
+      style.cursor = "pointer";
     }
 
     return style;

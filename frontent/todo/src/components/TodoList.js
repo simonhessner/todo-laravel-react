@@ -1,6 +1,4 @@
-import { useMutation, useQueryClient } from "react-query";
-import { useQuery } from "react-query";
-import { getList } from "../services/api";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import {
@@ -8,7 +6,7 @@ import {
   AiFillCloseSquare,
   AiFillDelete,
 } from "react-icons/ai";
-import { updateTodo, updateList, deleteTodo } from "../services/api";
+import { updateTodo, updateList, deleteTodo, getList } from "../services/api";
 import { RenameForm } from "./RenameForm";
 
 const Filter = ({ filter, setFilter }) => {

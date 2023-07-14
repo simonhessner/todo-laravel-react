@@ -15,6 +15,7 @@ export const TodoListForm = ({ onCreate }) => {
       alert(result.response.data.message);
     },
   });
+
   const handler = (event) => {
     event.preventDefault();
     newListMutation.mutate(event.target.listName.value);

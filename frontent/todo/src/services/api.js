@@ -22,18 +22,16 @@ export const removeList = (id) => {
   });
 };
 
+export const updateList = ({ list, id }) => {
+  return axios.put(`${baseUrl}/list/${id}`, list).then((res) => {
+    return res.data;
+  });
+};
+
 export const addTodo = ({ id, description }) => {
   return axios
     .post(`${baseUrl}/list/${id}/todo`, { description })
     .then((res) => res.data);
-};
-
-export const deleteTodo = ({ listId, todoId }) => {
-  return axios
-    .delete(`${baseUrl}/list/${listId}/todo/${todoId}`)
-    .then((res) => {
-      return res.data;
-    });
 };
 
 export const updateTodo = (todo) => {
@@ -47,8 +45,10 @@ export const updateTodo = (todo) => {
     });
 };
 
-export const updateList = ({ list, id }) => {
-  return axios.put(`${baseUrl}/list/${id}`, list).then((res) => {
-    return res.data;
-  });
+export const deleteTodo = ({ listId, todoId }) => {
+  return axios
+    .delete(`${baseUrl}/list/${listId}/todo/${todoId}`)
+    .then((res) => {
+      return res.data;
+    });
 };

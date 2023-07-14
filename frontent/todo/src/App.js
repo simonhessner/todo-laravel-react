@@ -33,7 +33,7 @@ function App() {
               </Row>
             </>
           )) ||
-            "Select or add a list on the left"}
+            "Select or add a list!"}
         </Col>
       </Row>
     </Container>
