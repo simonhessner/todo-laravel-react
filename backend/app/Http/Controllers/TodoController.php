@@ -68,8 +68,17 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Todo $todo)
+    public function destroy(string $list_id, string $todo_id)
     {
-        //
+        // TODO check if list matches
+        $todo = Todo::find($todo_id);
+        if ($todo) {
+            $todo->delete();
+            return response()->json([], 204);
+        } else {
+            return response()->json([
+                "error" => "Todo item not found"
+            ], 404);
+        }
     }
 }

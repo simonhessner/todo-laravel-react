@@ -3,8 +3,12 @@ import { useQuery } from "react-query";
 import { getList } from "../services/api";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import { AiFillCheckCircle, AiFillCloseSquare } from "react-icons/ai";
-import { updateTodo, updateList } from "../services/api";
+import {
+  AiFillCheckCircle,
+  AiFillCloseSquare,
+  AiFillDelete,
+} from "react-icons/ai";
+import { updateTodo, updateList, deleteTodo } from "../services/api";
 import { RenameForm } from "./RenameForm";
 
 const Filter = ({ filter, setFilter }) => {
@@ -64,6 +68,12 @@ export const TodoList = ({ id }) => {
     },
   });
 
+  const deleteTodoMutation = useMutation(deleteTodo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["list", id]);
+    },
+  });
+
   if (result.isLoading) {
     return "Loading...";
   }
@@ -88,7 +98,7 @@ export const TodoList = ({ id }) => {
       <div>
         <h2>{name}</h2>
         {header}
-        Empty list. Use the form below to add tasks
+        Nothing found. Use the form below to add tasks or change the filter
         <br />
         <br />
       </div>
@@ -115,6 +125,12 @@ export const TodoList = ({ id }) => {
       completed: !todo.completed,
     };
     updateTodoMutation.mutate(newTodo);
+  };
+
+  const remove = (todo) => {
+    if (window.confirm(`Do you really want do delete '${todo.description}'?`)) {
+      deleteTodoMutation.mutate({ listId: id, todoId: todo.id });
+    }
   };
 
   return (
@@ -144,6 +160,15 @@ export const TodoList = ({ id }) => {
                   )}
                   &nbsp;
                   {todo.completed ? "mark as incomplete" : "mark as complete"}
+                </Button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  style={{ padding: "1px", marginLeft: "5px" }}
+                  onClick={() => remove(todo)}
+                >
+                  <AiFillDelete />
+                  delete
                 </Button>
               </>
             )}

@@ -28,7 +28,7 @@ export const addTodo = ({ id, description }) => {
     .then((res) => res.data);
 };
 
-export const deleteTodo = (listId, todoId) => {
+export const deleteTodo = ({ listId, todoId }) => {
   return axios
     .delete(`${baseUrl}/list/${listId}/todo/${todoId}`)
     .then((res) => {
