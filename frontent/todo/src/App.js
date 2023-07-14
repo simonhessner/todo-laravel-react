@@ -10,8 +10,6 @@ import { TodoForm } from "./components/TodoForm";
 function App() {
   const [selected, setSelected] = useState(null);
 
-  const changeName = null;
-
   return (
     <Container>
       <Row>
