@@ -1,3 +1,5 @@
+![screenshot](screenshot.png)
+
 [Followup questions](FOLLOWUP.md)
 
 # How to run the project
