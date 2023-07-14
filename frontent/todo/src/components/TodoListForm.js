@@ -11,6 +11,9 @@ export const TodoListForm = ({ onCreate }) => {
       queryClient.invalidateQueries("lists");
       onCreate(result.id);
     },
+    onError: (result) => {
+      alert(result.response.data.message);
+    },
   });
   const handler = (event) => {
     event.preventDefault();

@@ -10,6 +10,9 @@ export const TodoForm = ({ id }) => {
     onSuccess: (result) => {
       queryClient.invalidateQueries(["list", id]);
     },
+    onError: (result) => {
+      alert(result.response.data.message);
+    },
   });
   const handler = (event) => {
     event.preventDefault();

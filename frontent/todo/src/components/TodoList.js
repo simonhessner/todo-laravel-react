@@ -20,6 +20,13 @@ export const TodoList = ({ id }) => {
     },
   });
 
+  const changeName = (newName) => {
+    const newList = {
+      name: newName,
+    };
+    updateListMutation.mutate({ list: newList, id });
+  };
+
   const updateListMutation = useMutation(updateList, {
     onSuccess: () => {
       queryClient.invalidateQueries(["list", id]);
@@ -37,8 +44,9 @@ export const TodoList = ({ id }) => {
   if (todos.length === 0) {
     return (
       <>
+        <RenameForm onUpdate={changeName} />
         <h2>{name}</h2>
-        Empty list
+        Empty list. Use the form below to add tasks
       </>
     );
   }
@@ -63,13 +71,6 @@ export const TodoList = ({ id }) => {
       completed: !todo.completed,
     };
     updateTodoMutation.mutate(newTodo);
-  };
-
-  const changeName = (newName) => {
-    const newList = {
-      name: newName,
-    };
-    updateListMutation.mutate({ list: newList, id });
   };
 
   return (
