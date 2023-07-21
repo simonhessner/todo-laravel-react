@@ -4,8 +4,8 @@
 
 # How to run the project
 
-1. go to the backend directory
-2. run `npm install`
+1. `git clone https://github.com/simonhessner/todo-laravel-react.git`
+2. go to the backend directory
 3. run `composer install`
 4. copy `.env.example` to `.env`
 5. run `php artisan key:generate`
