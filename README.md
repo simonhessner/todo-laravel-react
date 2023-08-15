@@ -1,7 +1,5 @@
 ![screenshot](screenshot.png)
 
-[Followup questions](FOLLOWUP.md)
-
 # How to run the project
 
 1. `git clone https://github.com/simonhessner/todo-laravel-react.git`
